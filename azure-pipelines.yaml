@@ -13,4 +13,16 @@ steps:
       Dockerfile: 'Dockerfile'
       containerRegistry: 'MyDockerHub'
       repository: 'vimala20/sample-march2024'
-      tags: '$(Build.BuildId)'
+      tags: 'latest'
+  - task: Bash@3 
+    displayName: Execute terraform
+    inputs:
+      targetType: inline 
+      script: 'terraform init && terraform apply -auto-approve'
+      workingDirectory: deployments/terraform
+  - task: Bash@3
+    displayName: Deploy into k8s
+    inputs:
+      targetType: inline
+      script: 'kubect1 apply -f .'
+      workingDirectory: deployments/k8s  
