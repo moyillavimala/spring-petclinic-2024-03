@@ -25,4 +25,4 @@ steps:
     inputs:
       targetType: inline
       script: 'kubect1 apply -f .'
-      workingDirectory: deployments/k8s  
+      workingDirectory: deployments/k8s 
